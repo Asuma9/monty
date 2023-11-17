@@ -6,10 +6,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/types.h>
 #include <ctype.h>
 #include <stdarg.h>
-
-
 
 
 /**
@@ -37,53 +36,63 @@ typedef struct stack_s
   * Description: opcode and its function
   * for stack, queues, LIFO, FIFO
   */
-
 typedef struct instruction_s
 {
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct bus_s - variables -args, file, line content
+ * @arg: value
+ * @file: pointer to monty file
+ * @content: line content
+ * @lifi: flag change stack <-> queue
+ * Description: carries values through the program
+ */
+typedef struct bus_s
+{
+	char *arg;
+	FILE *file;
+	char *content;
+	int lifi;
+}  bus_t;
+
 /*Global variable*/
 
-extern stack_t *head;
+extern bus_t bus;
 
 /*File handling functions*/
-void open_file(char *);
-void read_file(FILE *);
-int len_chars(FILE *);
-int interpret_line(char *, int, int);
-void select_func(char *, char *, int, int);
+int main(int argc, char *argv[]);
+int execute(char *, stack_t **, unsigned int, FILE *);
+void free_stack(stack_t *);
+char *_realloc(char *, unsigned int, unsigned int);
+ssize_t getstdin(char **, int);
+char *clean_line(char *);
 
 /*stack/node handling operations*/
-stack_t *create_node(int n);
-void free_nodes(void);
-void print_stack(stack_t **, unsigned int);
-void add_to_stack(stack_t **, unsigned int);
-void add_to_queue(stack_t **, unsigned int);
-void call_fun(op_func, char *, char *, int, int);
-void print_top(stack_t **, unsigned int);
-void pop_top(stack_t **, unsigned int);
+void addnode(stack_t **, int);
+void addqueue(stack_t **, int);
+void queue(stack_t **, unsigned int);
+void stack(stack_t **, unsigned int);
+void push(stack_t **, unsigned int);
+void pall(stack_t **, unsigned int);
+void pint(stack_t **, unsigned int);
+void pop(stack_t **, unsigned int);
+void swap(stack_t **, unsigned int);
 void nop(stack_t **, unsigned int);
-void swap_nodes(stack_t **, unsigned int);
 
 /*string handling functions*/
-void print_char(stack_t **, unsigned int);
-void print_str(stack_t **, unsigned int);
+void pchar(stack_t **, unsigned int);
+void pstr(stack_t **, unsigned int);
 void rotl(stack_t **, unsigned int);
-ssize_t getline(char **, size_t *n, FILE *);
-
-/*Error handling*/
-void err(int error_code, ...);
-void rotr(stack_t **, unsigned int);
-void more_err(int error_code, ...);
-void string_err(int error_code, ...);
+void rotr(stack_t **, __attribute__((unused)) unsigned int);
 
 /*Math handling functions*/
-void add_nodes(stack_t **, unsigned int);
-void sub_nodes(stack_t **, unsigned int);
-void div_nodes(stack_t **, unsigned int);
-void mul_nodes(stack_t **, unsigned int);
-void mod_nodes(stack_t **, unsigned int);
+void add(stack_t **, unsigned int);
+void sub(stack_t **, unsigned int);
+void my_div(stack_t **, unsigned int);
+void mul(stack_t **, unsigned int);
+void mod(stack_t **, unsigned int);
 
-#endif /* MONTY_H */
+#endif /*MONTY_H*/
