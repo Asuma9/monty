@@ -3,7 +3,7 @@
 /**
   *nop - does nothing
   *@head: head of the stack
-  @line_num: count line in operation
+  *@line_num: count line in operation
  */
 
 void nop(stack_t **head, unsigned int line_num)

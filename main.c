@@ -4,7 +4,7 @@
 bus_t bus = {NULL, NULL, NULL, 0};
 
 /**
-  *program entry point for monty interpreter
+  *main - program entry point for monty interpreter
   *@argc: count of command line arguments
   *@argv: array of arguments
   *Return: 0 on success
@@ -13,8 +13,8 @@ bus_t bus = {NULL, NULL, NULL, 0};
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *content;
-	size_t size = 0;
+	char *content = NULL;
+	/*size_t size = 0;*/
 	ssize_t read_line = 1;
 	stack_t *head = NULL;
 	unsigned int count = 0;
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	
+
 	file = fopen(argv[1], "r");
 	bus.file = file;
 	if (!file)
@@ -35,8 +35,12 @@ int main(int argc, char *argv[])
 	while (read_line > 0)
 	{
 		content = NULL;
-		read_line = getline(&content, &size, file);
-		bus.content = content;
+		/*read_line = getline(&content, &size, file);
+		*bus.content = content;*/
+		
+		/*using fgets*/
+		if (fgets(bus.content, sizeof(bus.content), file) == NULL)
+		{ break; }
 		count++;
 		if (read_line > 0)
 			execute(content, &head, count, file);

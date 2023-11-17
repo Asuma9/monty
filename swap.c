@@ -3,7 +3,7 @@
 /**
   *swap - swaps the top two elements of the stack
   *@head: head of the stack
-  @line_num: counts line in operation
+  *@line_num: counts line in operation
  */
 void swap(stack_t **head, unsigned int line_num)
 {
@@ -27,5 +27,5 @@ void swap(stack_t **head, unsigned int line_num)
 	top = *head;
 	temp = top->n;
 	top->n = top->next->n;
-	top->next->n=temp;
+	top->next->n = temp;
 }

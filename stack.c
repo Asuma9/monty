@@ -3,7 +3,7 @@
 /**
   *stack - prints the top of stack
   *@head: head of the stack
-  @line_num: counts the line at which we are opearating
+  *@line_num: counts the line at which we are opearating
  */
 
 void stack(stack_t **head, unsigned int line_num)

@@ -3,7 +3,7 @@
 /**
   *sub - subtracts the first 2 elements
   *@head: head of the stack
-  @line_num: count of the line in operation
+  *@line_num: count of the line in operation
  */
 void sub(stack_t **head, unsigned int line_num)
 {

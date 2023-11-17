@@ -3,7 +3,7 @@
 /**
   *queue - prints top of the queue
   *@head: head of stack
-  @line_num: count line in operation
+  *@line_num: count line in operation
  */
 void queue(stack_t **head, unsigned int line_num)
 {

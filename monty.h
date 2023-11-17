@@ -29,7 +29,7 @@ typedef struct stack_s
 } stack_t;
 
 /*
-  *instruction_s - opcode and its function
+  * struct instruction_s - opcode instructions and its function
   * @opcode: the opcode
   * @f: function to handle the opcode
   *

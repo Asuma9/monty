@@ -1,8 +1,8 @@
 #include "monty.h"
 /**
-  *prints the stack
+  *pall - &rints the stack
   *@head: head of the stack
-  *@line_num; count of line but not used
+  *@line_num: count of line but not used
  */
 
 void pall(stack_t **head, unsigned int line_num)
