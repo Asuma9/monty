@@ -15,7 +15,7 @@ int execute(char *content, stack_t **head, unsigned int line_num, FILE *file)
 		{"push", push}, {"pall", pall}, {"pint", pint},	{"pop", pop},
 		{"swap", swap},	{"add", add}, {"nop", nop}, {"div", my_div}, {"sub", sub},
 		{"mul", mul}, {"pchar", pchar},
-		{"pstr", pstr},	{"rotl", rotl},	{"rotr", rotr},	{"queue", queue},
+		{"pstr", pstr},	{"rotl", rotl},	{"rotr", rotr},	{"queue", f_queue},
 		{"stack", stack},
 		{NULL, NULL},
 	};

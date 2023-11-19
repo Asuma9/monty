@@ -73,7 +73,7 @@ char *clean_line(char *);
 /*stack/node handling operations*/
 void addnode(stack_t **, int);
 void addqueue(stack_t **, int);
-void queue(stack_t **, unsigned int);
+void f_queue(stack_t **, unsigned int);
 void stack(stack_t **, unsigned int);
 void push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
