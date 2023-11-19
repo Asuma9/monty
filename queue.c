@@ -5,7 +5,7 @@
   *@head: head of stack
   *@line_num: count line in operation
  */
-void queue(stack_t **head, unsigned int line_num)
+void f_queue(stack_t **head, unsigned int line_num)
 {
 	(void)head;
 	(void)line_num;
