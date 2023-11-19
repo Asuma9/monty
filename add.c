@@ -1,35 +1,27 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 #include "monty.h"
+
 /**
-  *add - sums the top two elements of the stack
-  *@head: head of the stack
-  *@line_num: count of the line we are operating on
+ * _add -  adds the first two nodes of the stack
+ * @stack: stack given by main
+ * @line_cnt: line counter
+ *
+ * Return: void
  */
-
-void add(stack_t **head, unsigned int line_num)
+void _add(stack_t **stack, unsigned int line_cnt)
 {
-	stack_t *top;
-	int index = 0, result;
+	int result;
 
-	top = *head;
-
-	while (top)
+	if (!stack || !*stack || !((*stack)->next))
 	{
-		top = top->next;
-		index++;
-	}
-	if (index < 2)
-	{
-		fprintf(stderr, "L%d:, can't add, stack too short\n", line_num);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_cnt);
 		exit(EXIT_FAILURE);
 	}
 
-	top = *head;
-	result = top->next->n + top->n;
-	top->next->n = result;
-	*head = top->next;
-	free(top);
-
+	result = ((*stack)->next->n) + ((*stack)->n);
+	pop(stack, line_cnt); /*For top node*/
+	(*stack)->n = result;
 }

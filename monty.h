@@ -1,26 +1,41 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/types.h>
 #include <ctype.h>
-#include <stdarg.h>
+#include <stddef.h>
+#include <stdlib.h>
 
+#define INSTRUCTIONS              \
+{                           \
+	{"push", push},       \
+	{"pall", pall},   \
+	{"pint", pint},   \
+	{"pop", pop},     \
+	{"swap", swap},   \
+	{"nop", nop},     \
+	{"div", _div},    \
+	{"mul", _mul},    \
+	{"add", _add},    \
+	{"sub", _sub},    \
+	{"mod", mod},     \
+	{"pchar", pchar}, \
+	{"pstr", pstr},   \
+	{"rotl", rotl},   \
+	{"rotr", rotr},   \
+	{                     \
+		NULL, NULL      \
+	}                     \
+}
 
 /**
-  * struct stack_s - doubly linked list representation of a stack (or queue)
-  * @n: integer
-  * @prev: points to the previous element of the stack (or queue)
-  * @next: points to the next element of the stack (or queue)
-  *
-  * Description: doubly linked list node structure
-  * for stack, queues, LIFO, FIFO
-  */
-
+ * struct stack_s - doubly linked list representation of a stack (or queue)
+ * @n: integer
+ * @prev: points to the previous element of the stack (or queue)
+ * @next: points to the next element of the stack (or queue)
+ *
+ * Description: doubly linked list node structure
+ * for stack, queues, LIFO, FIFO
+ */
 typedef struct stack_s
 {
 	int n;
@@ -28,14 +43,14 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-/*
-  * struct instruction_s - opcode instructions and its function
-  * @opcode: the opcode
-  * @f: function to handle the opcode
-  *
-  * Description: opcode and its function
-  * for stack, queues, LIFO, FIFO
-  */
+/**
+ * struct instruction_s - opcode and its function
+ * @opcode: the opcode
+ * @f: function to handle the opcode
+ *
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO
+ */
 typedef struct instruction_s
 {
 	char *opcode;
@@ -43,56 +58,46 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * struct bus_s - variables -args, file, line content
- * @arg: value
- * @file: pointer to monty file
- * @content: line content
- * @lifi: flag change stack <-> queue
- * Description: carries values through the program
+ * struct help - argument for the current opcode
+ * @data_struct: stack mode, stack (default) and queue
+ * @argument: the arguments of the string
+ *
+ * Description: global structure used to pass data around the functions easily
  */
-typedef struct bus_s
+typedef struct help
 {
-	char *arg;
-	FILE *file;
-	char *content;
-	int lifi;
-}  bus_t;
+	int data_struct;
+	char *argument;
+} help;
+help global;
 
-/*Global variable*/
-
-extern bus_t bus;
-
-/*File handling functions*/
-int main(int argc, char *argv[]);
-int execute(char *, stack_t **, unsigned int, FILE *);
+/* stack utility functions available in linked_list.c */
+stack_t *add_node(stack_t **, const int);
+stack_t *queue_node(stack_t **, const int);
 void free_stack(stack_t *);
-char *_realloc(char *, unsigned int, unsigned int);
-ssize_t getstdin(char **, int);
-char *clean_line(char *);
+size_t print_stack(const stack_t *);
 
-/*stack/node handling operations*/
-void addnode(stack_t **, int);
-void addqueue(stack_t **, int);
-void f_queue(stack_t **, unsigned int);
-void stack(stack_t **, unsigned int);
 void push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 void pint(stack_t **, unsigned int);
-void pop(stack_t **, unsigned int);
 void swap(stack_t **, unsigned int);
+void pop(stack_t **, unsigned int);
 void nop(stack_t **, unsigned int);
 
-/*string handling functions*/
+void _div(stack_t **, unsigned int);
+void _add(stack_t **, unsigned int);
+void _sub(stack_t **, unsigned int);
+void _mul(stack_t **, unsigned int);
+void mod(stack_t **, unsigned int);
+
 void pchar(stack_t **, unsigned int);
 void pstr(stack_t **, unsigned int);
 void rotl(stack_t **, unsigned int);
-void rotr(stack_t **, __attribute__((unused)) unsigned int);
+void rotr(stack_t **, unsigned int);
 
-/*Math handling functions*/
-void add(stack_t **, unsigned int);
-void sub(stack_t **, unsigned int);
-void my_div(stack_t **, unsigned int);
-void mul(stack_t **, unsigned int);
-void mod(stack_t **, unsigned int);
+void opcode(stack_t **, char *, unsigned int);
 
-#endif /*MONTY_H*/
+int is_digit(char *);
+int isnumber(char *);
+
+#endif /* MONTY_H */

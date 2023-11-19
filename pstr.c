@@ -1,24 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "monty.h"
+
 /**
-  *pstr - prints string in stack starting from the top of the stack
-  *@head: head of stack
-  *@line_num: count of stack line we are at
+ * pstr - prints the contents of a stack_t stack as a string
+ * @stack: stack given by main
+ * @line_cnt: line counter for error messages
+ *
+ * Return: nothing
  */
-
-void pstr(stack_t **head, unsigned int line_num)
+void pstr(stack_t **stack, unsigned int line_cnt __attribute__((unused)))
 {
-	stack_t *top;
-	(void)line_num;
+	stack_t *current = *stack;
 
-	top = *head;
-	while (top)
+	while (current)
 	{
-		if (top->n > 127 || top->n <= 0)
-		{
+		if (current->n <= 0 || current->n > 127)
 			break;
-		}
-		printf("%c", top->n);
-		top = top->next;
+		putchar((char) current->n);
+		current = current->next;
 	}
-	printf("\n");
+	putchar('\n');
 }

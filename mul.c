@@ -1,32 +1,28 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 #include "monty.h"
 
 /**
-  *mul - multiplies the first top 2 elements of a stack
-  *@head: head of the stack
-  *@line_num: count of line in operation
+ * _mul - divides the next top value by the top value
+ * @stack: stack given by main
+ * @line_cnt: line counter
+ *
+ * Return: void
  */
-void mul(stack_t **head, unsigned int line_num)
+void _mul(stack_t **stack, unsigned int line_cnt)
 {
-	stack_t *top;
-	int index = 0, result;
+	int result;
 
-	top = *head;
-	while (top)
+	if (!stack || !*stack || !((*stack)->next))
 	{
-		top = top->next;
-		index++;
-	}
-	if (index < 2)
-	{
-		fprintf(stderr, "L%d: can't mul, stack too short\n", line_num);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_cnt);
 		exit(EXIT_FAILURE);
+		return;
 	}
-	top = *head;
-	result = top->next->n * top->n;
-	top->next->n = result;
-	*head = top->next;
-	free(top);
+
+	result = ((*stack)->next->n) * ((*stack)->n);
+	pop(stack, line_cnt);/*For top node*/
+	(*stack)->n = result;
 }
