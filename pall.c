@@ -8,7 +8,7 @@
 void pall(stack_t **head, unsigned int line_num)
 {
 	stack_t *top;
-	(void)line_num;
+	line_num;
 
 	top = *head;
 	if (top == NULL)
@@ -17,5 +17,6 @@ void pall(stack_t **head, unsigned int line_num)
 	{
 		printf("%d\n", top->n);
 		top = top->next;
+		line_num++;
 	}
 }
