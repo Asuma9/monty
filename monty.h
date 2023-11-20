@@ -4,6 +4,8 @@
 #include <ctype.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 #define INSTRUCTIONS              \
 {                           \
@@ -13,10 +15,10 @@
 	{"pop", pop},     \
 	{"swap", swap},   \
 	{"nop", nop},     \
-	{"div", _div},    \
-	{"mul", _mul},    \
-	{"add", _add},    \
-	{"sub", _sub},    \
+	{"div", my_div},    \
+	{"mul", mul},    \
+	{"add", add},    \
+	{"sub", sub},    \
 	{"mod", mod},     \
 	{"pchar", pchar}, \
 	{"pstr", pstr},   \
@@ -84,10 +86,10 @@ void swap(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
 void nop(stack_t **, unsigned int);
 
-void _div(stack_t **, unsigned int);
-void _add(stack_t **, unsigned int);
-void _sub(stack_t **, unsigned int);
-void _mul(stack_t **, unsigned int);
+void my_div(stack_t **, unsigned int);
+void add(stack_t **, unsigned int);
+void sub(stack_t **, unsigned int);
+void mul(stack_t **, unsigned int);
 void mod(stack_t **, unsigned int);
 
 void pchar(stack_t **, unsigned int);

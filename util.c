@@ -1,29 +1,28 @@
-#include <ctype.h>
 #include "monty.h"
 
 /**
  * is_digit - checks if a string is a digit
  * @string: string to check
  *
- * Return: 1 if success, 0 if not
+ * Return: 1 if a digit, 0 if not
  */
-int is_digit(char *string)
+int is_digit(char *str)
 {
-	if (!string || *string == '\0')
+	if (!str || *str == '\0')
 		return (0);
-	if (*string == '-')
-		string++;
-	while (*string)
+	if (*str == '-')
+		str++;
+	while (*str)
 	{
-		if (isdigit(*string) == 0)
+		if (isdigit(*str) == 0)
 			return (0);
-		string++;
+		str++;
 	}
 	return (1);
 }
 /**
  * isnumber - checks if a string is a number
- * @str: provided string
+ * @str: string to be checked
  *
  * Return: 1 if the string is a number, else, 0.
  */

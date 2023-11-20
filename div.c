@@ -5,30 +5,29 @@
 #include "monty.h"
 
 /**
- * _div - divides the next top value by the top value
- * @stack: stack given by main
- * @line_cnt: line counter
- *
- * Return: void
+ * my_div - divides the first 2 elements of the stack
+ * @head: stack given by main
+ * @line_num: counts line in operation
  */
-void _div(stack_t **stack, unsigned int line_cnt)
+
+void my_div(stack_t **head, unsigned int line_num)
 {
 	int result;
 
-	if (!stack || !*stack || !((*stack)->next))
+	if (!head || !*head || !((*head)->next))
 	{
-		fprintf(stderr, "L%d: can't div, stack too short\n", line_cnt);
+		fprintf(stderr, "L%d: can't div, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	}
-	if (((*stack)->n) == 0)
+	if (((*head)->n) == 0)
 	{
-		fprintf(stderr, "L%d: division by zero\n", line_cnt);
+		fprintf(stderr, "L%d: division by zero\n", line_num);
 		exit(EXIT_FAILURE);
 		;
 		return;
 	}
 
-	result = ((*stack)->next->n) / ((*stack)->n);
-	pop(stack, line_cnt);/*For top node*/
-	(*stack)->n = result;
+	result = ((*head)->next->n) / ((*head)->n);
+	pop(head, line_num);/*For top node*/
+	(*head)->n = result;
 }

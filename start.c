@@ -1,32 +1,30 @@
 #define  _POSIX_C_SOURCE 200809L
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include "monty.h"
 
 void file_error(char *argv);
 void error_usage(void);
-int status = 0;                     /* global var declaration */
+int status = 0;                    
+
+/* global var declaration */
 
 /**
- * main - entry point
- * @argv: list of arguments passed to our program
- * @argc: amount of args
- *
- * Return: nothing
+ * main - program entry point
+ * @argv: array list of arguments passed to the program
+ * @argc: count of arguments passed
  */
+
 int main(int argc, char **argv)
 {
 	FILE *file;
 	size_t buf_len = 0;
 	char *buffer = NULL;
 	char *str = NULL;
-	stack_t *stack = NULL;
-	unsigned int line_cnt = 1;
+	stack_t *head = NULL;
+	unsigned int line_num = 1;
 
-	global.data_struct = 1;  /* struct defined in monty.h L58*/
+	global.data_struct = 1;  /* struct defined in monty.h*/
 	if (argc != 2)
-		error_usage(); /* def in line 82 */
+		error_usage();
 
 	file = fopen(argv[1], "r");
 
@@ -39,32 +37,32 @@ int main(int argc, char **argv)
 			break;
 		if (*buffer == '\n')
 		{
-			line_cnt++;
+			line_num++;
 			continue;
 		}
 		str = strtok(buffer, " \t\n");
 		if (!str || *str == '#')
 		{
-			line_cnt++;
+			line_num++;
 			continue;
 		}
 		global.argument = strtok(NULL, " \t\n");
-		opcode(&stack, str, line_cnt);
-		line_cnt++;
+		opcode(&head, str, line_num);
+		line_num++;
 	}
 	free(buffer);
-	free_stack(stack);
+	free_stack(head);
 	fclose(file);
 	exit(EXIT_SUCCESS);
 }
 
 /**
  * file_error - prints file error message and exits
- * @argv: argv given by main()
+ * @argv: array list passed by main()
  *
- * Desc: print msg if  not possible to open the file
- * Return: nothing
+ * Desc: print error msg if fopen() fails
  */
+
 void file_error(char *argv)
 {
 	fprintf(stderr, "Error: Can't open file %s\n", argv);
@@ -72,13 +70,14 @@ void file_error(char *argv)
 }
 
 /**
- * error_usage - prints usage message and exits
+ * error_usage - prints error usage message and exits
  *
- * Desc: if user does not give any file or more than
+ * Desc: if user does not give any file name or more than
  * one argument to your program
  *
  * Return: nothing
  */
+
 void error_usage(void)
 {
 	fprintf(stderr, "USAGE: monty file\n");

@@ -1,36 +1,31 @@
-#include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
 #include "monty.h"
 
 /**
- * push - push element into the stack
- * @stack: stack given by main
- * @line_cnt: amount of lines
- *
- * Return: void
+ * push - pushes an element into the stack
+ * @head: first element of the stack passed by main
+ * @line_num: gives the line number of the error message
  */
-void push(stack_t **stack, unsigned int line_cnt)
+
+void push(stack_t **head, unsigned int line_num)
 {
 	char *n = global.argument;
 
 	if ((is_digit(n)) == 0)
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
+		fprintf(stderr, "L%d: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
 	}
 
 	if (global.data_struct == 1)
 	{
-		if (!add_node(stack, atoi(global.argument)))
+		if (!add_node(head, atoi(global.argument)))
 		{
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		if (!queue_node(stack, atoi(global.argument)))
+		if (!queue_node(head, atoi(global.argument)))
 		{
 			exit(EXIT_FAILURE);
 		}
