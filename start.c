@@ -3,7 +3,7 @@
 
 void file_error(char *argv);
 void error_usage(void);
-int status = 0;                    
+int status = 0;
 
 /* global var declaration */
 
@@ -11,6 +11,7 @@ int status = 0;
  * main - program entry point
  * @argv: array list of arguments passed to the program
  * @argc: count of arguments passed
+ * Return: void
  */
 
 int main(int argc, char **argv)

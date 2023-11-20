@@ -2,7 +2,7 @@
 
 /**
  * queue_node - adds a node to a stack_t stack in queue_node
- * @head first node of stack
+ * @head: first node of stack
  * @n: node data number
  *Return: newly created node, NULL if memory allocation fails.
  */
